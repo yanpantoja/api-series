@@ -14,8 +14,12 @@ class CriarTabelaEpisodios extends Migration
     public function up()
     {
         Schema::create('episodios', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->tinyIncrements('id');
+            $table->integer('temporada');
+            $table->integer('numero');
+            $table->boolean('assistido')->default(false);
+            $table->integer('serie_id');
+            $table->foreign('serie_id')->references('series')->on('id');
         });
     }
 
