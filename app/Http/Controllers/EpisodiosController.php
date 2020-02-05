@@ -3,47 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Serie;
+use App\Episodio;
 
-class SeriesController extends Controller
+class EpisodiosController extends Controller
 {
    public function index()
    {
-        return Serie::all();
+        return Episodio::all();
    }
 
    public function store(Request $request)
    {
-       $serie = ['nome' => $request->nome];
-       return response()->json(Serie::create($serie), 201);
+       $episodio = ['nome' => $request->nome];
+       return response()->json(Episodio::create($episodio), 201);
    }
 
    public function show($id)
    {
-        $serie = Serie::find($id);
-        if(is_null($serie)){
+        $episodio = Episodio::find($id);
+        if(is_null($episodio)){
             return response()->json('', 204);
         }
-        return response()->json($serie, 200);
+        return response()->json($episodio, 200);
    }
 
    public function update($id, Request $request)
    {
-        $serie = Serie::find($id);
-        if(is_null($serie)){
+        $episodio = Episodio::find($id);
+        if(is_null($episodio)){
             return response()->json([
                 'erro' => 'Recurso não encontrado.'
             ], 404);
         }
-        $serie->fill($request->all());
-        $serie->save();
+        $episodio->fill($request->all());
+        $episodio->save();
 
-        return $serie;
+        return $episodio;
    }
 
    public function destroy($id)
    {
-       $quantidadeRecursosRemovidos = Serie::detroy($id);
+       $quantidadeRecursosRemovidos = Episodio::detroy($id);
        if($quantidadeRecursosRemovidos === 0) {
            return response()->json([
                'erro' => 'Recurso não encontrado'

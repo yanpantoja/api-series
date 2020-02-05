@@ -15,7 +15,7 @@ class CriarTabelaSeries extends Migration
     {
         Schema::create('series', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name')->unique();
+            $table->string('nome')->unique();
         });
     }
 
