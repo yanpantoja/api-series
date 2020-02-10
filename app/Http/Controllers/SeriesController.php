@@ -7,6 +7,6 @@ class SeriesController extends BaseController
 {
     public function __construct()
     {
-        $this->class = Series::class;
+        $this->class = Serie::class;
     }
 }

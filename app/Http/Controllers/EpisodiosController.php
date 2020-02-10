@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Episodio;
-class EpisodiosController extends BaseControllerController
+class EpisodiosController extends BaseController
 {
     public function __construct()
     {
-        $this->class = Episodios::class;
+        $this->class = Episodio::class;
     }
 }
