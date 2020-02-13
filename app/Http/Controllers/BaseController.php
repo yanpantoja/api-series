@@ -7,15 +7,14 @@ abstract class BaseController
 {
     protected $class;
 
-    public function index()
+    public function index(Request $request)
     {
         return $this->class::all();
     }
 
     public function store(Request $request)
     {
-        $recurso = ['nome' => $request->nome];
-        return response()->json($this->class::create($recurso), 201);
+        return response()->json($this->class::create($request->all()), 201);
     }
 
     public function show($id)
@@ -43,7 +42,7 @@ abstract class BaseController
 
     public function destroy($id)
     {
-       $quantidadeRecursosRemovidos = $this->class::detroy($id);
+       $quantidadeRecursosRemovidos = $this->class::destroy($id);
        if($quantidadeRecursosRemovidos === 0) {
            return response()->json([
                'erro' => 'Recurso não encontrado'
