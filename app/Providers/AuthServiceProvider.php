@@ -34,15 +34,14 @@ class AuthServiceProvider extends ServiceProvider
         // the User instance via an API token or any other method necessary.
 
         $this->app['auth']->viaRequest('api', function (Request $request) {
-            if ($request->hasHeader('Authorization')) {
+            if (!$request->hasHeader('Authorization')) {
                 return null;
             }
             $authorizationHeader = $request->header('Authorization');
-            $token = str_replace('Bearer', env('JWT_KEY'), $authorizationHeader);
-            $authData = JWT::decode($token, '', ['HS256']);
+            $token = str_replace('Bearer ', '', $authorizationHeader);
+            $authData = JWT::decode($token, env('JWT_KEY'), ['HS256']);
 
-            return new GenericUser(['email' => $authData]);
-//            return User::where('api_token', $request->input('api_token'))->first();
+            return User::where('email', $authData->email)->first();
         });
     }
 }
