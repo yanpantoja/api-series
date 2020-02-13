@@ -1,6 +1,11 @@
 <?php
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+// Type Hint:
+/** @var \Laravel\Lumen\Routing\Router $router */
+
+$router->post('/api/login', 'TokenController@gerarToken');
+
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
 
     $router->group(['prefix' => 'series'], function () use ($router){
         $router->post('', 'SeriesController@store');
